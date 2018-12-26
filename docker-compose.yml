@@ -1,0 +1,102 @@
+version: '3'
+services:
+  selenium:
+    image: selenium/standalone-firefox:3.141.59-bismuth
+    ports:
+      - "4444:4444"
+    volumes:
+      - /dev/shm:/dev/shm
+      - /home/$USER/Selenium:/home/seluser/Downloads
+    container_name: selenium
+    networks: 
+      - backend
+    restart: always
+  rbase: 
+    image: aabor/rbase
+    build: .
+    container_name: rbase
+    volumes:
+      - /home/$USER/Documents:/home/docker/Documents
+      - /home/$USER/Selenium:/home/docker/Selenium
+      - /home/$USER/docker/rbase-finance/log:/home/docker/fh/log
+      - /home/$USER/docker/rbase-finance/www:/home/docker/fh/www
+      - /home/$USER/docker/rbase-finance/img:/home/docker/fh/img
+      - /home/$USER/Documents/Trading/fh_data-dev:/home/docker/fh/data
+      # folder with quotes updated by MetaTrader
+      - /home/$USER/Dropbox/mt4/data-dev:/home/docker/fh/data/mt4
+      # SSH keys
+      - /home/$USER/.ssh:/home/docker/.ssh/  
+      # Secrets
+      - /home/$USER/.secrets:/home/docker/.secrets/  
+    ports:
+      - "8787:8787"
+      - "3838:3838"
+    environment:
+      - USER=rstudio
+      - PASSWORD=123
+    networks: 
+      - backend
+    restart: always
+    depends_on:
+      - selenium
+  rbase-finance: 
+    image: aabor/rbase-finance
+    build: ../rbase-finance
+    container_name: rbase-finance
+    volumes:
+      - /home/$USER/Documents:/home/docker/Documents
+      - /home/$USER/Selenium:/home/docker/Selenium
+      - /home/$USER/docker/rbase-finance/log:/home/docker/fh/log
+      - /home/$USER/docker/rbase-finance/www:/home/docker/fh/www
+      - /home/$USER/docker/rbase-finance/img:/home/docker/fh/img
+      - /home/$USER/Documents/Trading/fh_data-dev:/home/docker/fh/data
+      # folder with quotes updated by MetaTrader
+      - /home/$USER/Dropbox/mt4/data-dev:/home/docker/fh/data/mt4
+      # SSH keys
+      - /home/$USER/.ssh:/home/docker/.ssh/  
+      # Secrets
+      - /home/$USER/.secrets:/home/docker/.secrets/  
+    ports:
+      - "8788:8787"
+      - "3839:3838"
+    environment:
+      - USER=rstudio
+      - PASSWORD=123
+    links:
+      - selenium:selenium
+    networks: 
+      - backend
+    restart: always
+    depends_on:
+      - selenium
+  rbase-text: 
+    image: aabor/rbase-text
+    build: ../rbase-text
+    container_name: rbase-text
+    volumes:
+      - /home/$USER/Documents:/home/docker/Documents
+      - /home/$USER/Selenium:/home/docker/Selenium
+      - /home/$USER/docker/rbase-finance/log:/home/docker/fh/log
+      - /home/$USER/docker/rbase-finance/www:/home/docker/fh/www
+      - /home/$USER/docker/rbase-finance/img:/home/docker/fh/img
+      - /home/$USER/Documents/Trading/fh_data-dev:/home/docker/fh/data
+      # folder with quotes updated by MetaTrader
+      - /home/$USER/Dropbox/mt4/data-dev:/home/docker/fh/data/mt4
+      # SSH keys
+      - /home/$USER/.ssh:/home/docker/.ssh/  
+      # Secrets
+      - /home/$USER/.secrets:/home/docker/.secrets/  
+    ports:
+      - "8789:8787"
+      - "3840:3838"
+    environment:
+      - USER=rstudio
+      - PASSWORD=123
+    networks: 
+      - backend
+    restart: always
+    depends_on:
+      - selenium
+networks: 
+  backend:
+    driver: bridge
