@@ -27,8 +27,8 @@ RUN install2.r --error \
     rugarch \
     && rm -rf /tmp/downloaded_packages/
 
-RUN install2.r --error \ 
-    # QuantLib Library aims to provide a comprehensive software framework for quantitative finance. The goal is to provide a standard open source library for quantitative analysis, modeling, trading, and risk management of financial assets
-    RQuantLib \
-    && rm -rf /tmp/downloaded_packages/
+# RUN install2.r --error \ 
+#     # QuantLib Library aims to provide a comprehensive software framework for quantitative finance. The goal is to provide a standard open source library for quantitative analysis, modeling, trading, and risk management of financial assets
+#     RQuantLib \
+#     && rm -rf /tmp/downloaded_packages/
     

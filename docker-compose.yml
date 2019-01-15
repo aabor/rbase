@@ -21,7 +21,7 @@ services:
     restart: always
   rbase-finance: 
     image: aabor/rbase-finance
-    build: /rbase-finance/.
+    build: rbase-finance/.
     container_name: rbase-finance
     volumes:
       - /home/$USER/Selenium:/home/docker/Selenium
