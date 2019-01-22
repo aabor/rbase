@@ -291,8 +291,10 @@ RUN sudo installGithub.r \
   ropensci/RSelenium \
   && rm -rf /tmp/downloaded_packages/
 
-# RUN install2.r --error \
-#   RSelenium \
-#   && rm -rf /tmp/downloaded_packages/
-
+RUN install2.r --error \ 
+    #Gives the ability to automatically generate and serve an HTTP API from R functions using the annotations in the R documentation around your functions.
+    plumber \
+    # Pure R implementation of the ubiquitous log4j package. It offers hierarchic loggers, multiple handlers per logger, level based filtering, space handling in messages and custom formatting.
+    logging \
+    && rm -rf /tmp/downloaded_packages/
 
