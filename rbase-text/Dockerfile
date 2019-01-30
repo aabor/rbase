@@ -5,6 +5,8 @@ USER root
 
 # machine learning
 RUN install2.r --error \ 
+     # #R string manipulation functions that account for the effects of ANSI text formatting control sequences
+     # fansi \
      # set of functions for extending dendrogram objects in R, letting you visualize and compare trees of hierarchical clusterings
      dendextend \
      && rm -rf /tmp/downloaded_packages/
