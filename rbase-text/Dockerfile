@@ -1,28 +1,22 @@
 # aabor/rstudio-text
 FROM aabor/rbase
+
+USER root
+
 # machine learning
 RUN install2.r --error \ 
-    # set of functions for extending dendrogram objects in R, letting you visualize and compare trees of hierarchical clusterings
-    dendextend \
-    && rm -rf /tmp/downloaded_packages/
+     # set of functions for extending dendrogram objects in R, letting you visualize and compare trees of hierarchical clusterings
+     dendextend \
+     && rm -rf /tmp/downloaded_packages/
+
 # text mining
 RUN install2.r --error \ 
-    # bibliography reference manager
-    RefManageR \
-    # transcript analysis, Text Mining/ Natural Language Processing: frequency counts of sentence types, words, sentences, turns of talk, syllables and other assorted analysis tasks
-    qdap \
     # reshape and restructure text data.
     textshape \
     # Text Mining
     tm \
     # Natural Language Processing
     wordcloud \
-    # an R interface to WordNet , a large lexical database of English. 
-    wordnet \
-    # An R interface to Weka (Version 3.9.2). Weka is a collection of machine learning algorithms for data mining tasks written in Java, containing tools for data pre-processing, classification, regression, clustering, association rules, and visualization
-    RWeka \
-    # an R interface to KEA (Version 5.0). KEA (for Keyphrase Extraction Algorithm) allows for extracting keyphrases from text documents. It can be either used for free indexing or for indexing with a controlled vocabulary.
-    RKEA \
     # Porter's word stemming algorithm. 
     SnowballC \
     # helps split text into tokens, supporting shingled n-grams, skip n-grams, words, word stems, sentences, paragraphs, characters, lines, and regular expressions. 
@@ -42,10 +36,6 @@ RUN install2.r --error \
     textmineR \
     # Automatic Text Classification via Supervised Learning
     RTextTools \
-    # allows downloading and processing public domain works in the Project Gutenberg collection. Includes metadata for all Project Gutenberg works, so that they can be searched and retrieved.
-    gutenbergr \
-    #approximate string matching version of R's native 'match' function
-    stringdist \
     && rm -rf /tmp/downloaded_packages/
 # image processing
 RUN apt-get update && apt-get install -y \
@@ -58,7 +48,29 @@ RUN install2.r --error \
     # OCR - Optical character recognition
     tesseract \
     && rm -rf /tmp/downloaded_packages/
+# bibliography
+RUN install2.r --error \ 
+    # bibliography reference manager
+    RefManageR \
+    # allows downloading and processing public domain works in the Project Gutenberg collection. Includes metadata for all Project Gutenberg works, so that they can be searched and retrieved.
+    gutenbergr \
+    && rm -rf /tmp/downloaded_packages/
+
 #RUN installGithub.r \
 #    && rm -rf /tmp/downloaded_packages/
 
+# #Java dependent libraries    
+# RUN install2.r --error \ 
+#     # transcript analysis, Text Mining/ Natural Language Processing: frequency counts of sentence types, words, sentences, turns of talk, syllables and other assorted analysis tasks
+#     qdap \
+#     #approximate string matching version of R's native 'match' function
+#     stringdist \
+#     # an R interface to WordNet , a large lexical database of English. 
+#     wordnet \
+#      # An R interface to Weka (Version 3.9.2). Weka is a collection of machine learning algorithms for data mining tasks written in Java, containing tools for data pre-processing, classification, regression, clustering, association rules, and visualization 
+#      RWeka \
+#     # an R interface to KEA (Version 5.0). KEA (for Keyphrase Extraction Algorithm) allows for extracting keyphrases from text documents. It can be either used for free indexing or for indexing with a controlled vocabulary.
+#     RKEA \
+#     && rm -rf /tmp/downloaded_packages/
 
+USER docker

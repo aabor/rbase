@@ -5,58 +5,57 @@ services:
     build: rbase/.
     container_name: rbase
     volumes:
-      - /home/$USER/Selenium:/home/docker/Selenium
-      - /home/$USER/Documents/Trading/fh_data-dev:/home/docker/fh/data
-      - /home/$USER/Dropbox/mt4/data-dev:/home/docker/fh/data/mt4
+      - ~/Documents/Trading/fh_data-dev:/home/docker/fh/data
+      - ~/Dropbox/mt4/data-dev:/home/docker/fh/data/mt4
       # SSH keys
-      - /home/$USER/.ssh:/home/docker/.ssh/  
+      - ~/.ssh:/home/docker/.ssh/  
       # Secrets
-      - /home/$USER/.secrets:/home/docker/.secrets/  
+      - ~/.secrets:/home/docker/.secrets/  
     ports:
       - "8787:8787"
       - "3838:3838"
     environment:
       - TZ="Europe/Kiev"
-      - USER=rstudio
+      - USER=docker
       - PASSWORD=123
+      - GIT_VERSION=$GIT_VERSION
     restart: always
   rbase-finance: 
     image: aabor/rbase-finance
     build: rbase-finance/.
-    container_name: rbase-finance
     volumes:
-      - /home/$USER/Selenium:/home/docker/Selenium
-      - /home/$USER/Documents/Trading/fh_data-dev:/home/docker/fh/data
-      - /home/$USER/Dropbox/mt4/data-dev:/home/docker/fh/data/mt4
+      - ~/Documents/Trading/fh_data-dev:/home/docker/fh/data
+      - ~/Dropbox/mt4/data-dev:/home/docker/fh/data/mt4
       # SSH keys
-      - /home/$USER/.ssh:/home/docker/.ssh/  
+      - ~/.ssh:/home/docker/.ssh/  
       # Secrets
-      - /home/$USER/.secrets:/home/docker/.secrets/  
+      - ~/.secrets:/home/docker/.secrets/  
     ports:
       - "8788:8787"
       - "3839:3838"
     environment:
       - TZ="Europe/Kiev"
-      - USER=rstudio
+      - USER=docker
       - PASSWORD=123
+      - GIT_VERSION=$GIT_VERSION
     restart: always
   rbase-text: 
     image: aabor/rbase-text
     build: rbase-text/.
     container_name: rbase-text
     volumes:
-      - /home/$USER/Selenium:/home/docker/Selenium
-      - /home/$USER/Documents/Trading/fh_data-dev:/home/docker/fh/data
-      - /home/$USER/Dropbox/mt4/data-dev:/home/docker/fh/data/mt4
+      - ~/Documents/Trading/fh_data-dev:/home/docker/fh/data
+      - ~/Dropbox/mt4/data-dev:/home/docker/fh/data/mt4
       # SSH keys
-      - /home/$USER/.ssh:/home/docker/.ssh/  
+      - ~/.ssh:/home/docker/.ssh/  
       # Secrets
-      - /home/$USER/.secrets:/home/docker/.secrets/  
+      - ~/.secrets:/home/docker/.secrets/  
     ports:
       - "8789:8787"
       - "3840:3838"
     environment:
       - TZ="Europe/Kiev"
-      - USER=rstudio
+      - USER=docker
       - PASSWORD=123
+      - GIT_VERSION=$GIT_VERSION
     restart: always
