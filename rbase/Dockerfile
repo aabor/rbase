@@ -29,6 +29,10 @@ RUN apt-get update && apt-get install -y libfreetype6-dev \
   libcairo2-dev \
   && apt-get clean
 
+RUN apt-get update && apt-get install -y \
+  libxml2-dev \
+  libapparmor-dev
+
 RUN install2.r --error \
   sys \
   askpass \
@@ -36,9 +40,6 @@ RUN install2.r --error \
   curl \
   httr \
   && rm -rf /tmp/downloaded_packages/
-
-RUN apt-get update && apt-get install -y \
-  libxml2-dev
 
 RUN install2.r --error \
   Rcpp xml2 glue stringi stringr selectr magrittr rvest\
