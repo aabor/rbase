@@ -16,19 +16,18 @@ RUN installGithub.r \
     && rm -rf /tmp/downloaded_packages/
 
 RUN install2.r --error \ 
-    # # Quantitative Financial Modelling Framework
-    # quantmod \
-    # # Tools for Quantitative Risk Management
-    # qrmtools \
+    # Tools for Quantitative Risk Management
+    qrmtools \
     # Various data sets (stocks, stock indices, constituent data, FX, zero-coupon bond yield curves, volatility,
     # commodities) for Quantitative Risk Management practice
     qrmdata \
     && rm -rf /tmp/downloaded_packages/
 
-# RUN install2.r --error \ 
-#ARFIMA, in-mean, external regressors and various GARCH flavors, with methods for fit,
-#     forecast, simulation, inference and plotting rugarch \
-#     && rm -rf /tmp/downloaded_packages/
+RUN install2.r --error \ 
+    #ARFIMA, in-mean, external regressors and various GARCH flavors, with methods for fit, forecast, simulation,
+    #inference and plotting 
+    rugarch \
+    && rm -rf /tmp/downloaded_packages/
 
  # QuantLib installation
 RUN  apt-get update && apt-get install -y \

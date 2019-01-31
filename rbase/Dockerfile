@@ -1,6 +1,6 @@
 # aabor/rbase
 # configured for automatic build
-FROM rocker/r-ver:3.4.3
+FROM rocker/r-ver:3.5.2
 
 LABEL maintainer="A. Borochkin"
 
