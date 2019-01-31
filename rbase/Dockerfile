@@ -123,7 +123,8 @@ RUN install2.r --error \
   && rm -rf /tmp/downloaded_packages/
 
 RUN install2.r --error \ 
-    #Functions for latent class analysis, short time Fourier transform, fuzzy clustering, support vector machines, shortest path computation, bagged clustering, naive Bayes classifier
+    #Functions for latent class analysis, short time Fourier transform, fuzzy clustering, support vector machines,
+    #shortest path computation, bagged clustering, naive Bayes classifier
     e1071 \
     # Gaussian Mixture Modelling for Model-Based Clustering, Classification, and Density Estimation
     mclust \
@@ -139,25 +140,40 @@ RUN install2.r --error \
     caret \
     # Breiman and Cutler's Random Forests for Classification and Regression
     randomForest \
-    # Solve optimization problems using an R interface to NLopt. NLopt is a free/open-source library for nonlinear optimization.
+    # Solve optimization problems using an R interface to NLopt. NLopt is a free/open-source library for nonlinear
+    # optimization.
     nloptr \
     # A collection of dimensionality reduction techniques from R packages and a common interface for calling the methods
     dimRed \
     #  A collection of tests, data sets, and examples for diagnostic checking in linear regression models. 
     lmtest \
-    # core survival analysis routines, including definition of Surv objects, Kaplan-Meier and Aalen-Johansen (multi-state) curves, Cox models, and parametric accelerated failure time models.
+    # core survival analysis routines, including definition of Surv objects, Kaplan-Meier and Aalen-Johansen
+    # (multi-state) curves, Cox models, and parametric accelerated failure time models.
     survival \
-    # Tools for Descriptive Statistics first descriptive tasks in data analysis,
-    # consisting of calculating descriptive statistics, drawing graphical summaries and reporting the results
-    # %overlaps% determines if two date ranges overlap
+    # Tools for Descriptive Statistics first descriptive tasks in data analysis, consisting of calculating descriptive
+    # statistics, drawing graphical summaries and reporting the results %overlaps% determines if two date ranges overlap
     DescTools \
+    && rm -rf /tmp/downloaded_packages/
+
+RUN install2.r --error \
+    # A Tool Kit for Working with Time Series in R
+    timetk \
+    # Bringing financial analysis to the 'tidyverse'. The 'tidyquant' package provides a convenient wrapper to various
+    # 'xts', 'zoo', 'quantmod', 'TTR' and 'PerformanceAnalytics' package functions and returns the objects in the tidy
+    # 'tibble' format. The main advantage is being able to use quantitative functions with the 'tidyverse' functions
+    # including 'purrr', 'dplyr', 'tidyr', 'ggplot2', 'lubridate', etc.
+    tidyquant \
     && rm -rf /tmp/downloaded_packages/
 
 # connection to other applications: Excel, Acrobat, ...
 RUN install2.r --error \ 
-    # Text Extraction, Rendering and Converting of PDF Documents. Utilities based on 'libpoppler' for extracting text, fonts, attachments and metadata from a PDF file. Also supports high quality rendering of PDF documents info PNG, JPEG, TIFF format, or into raw bitmap vectors
+    # Text Extraction, Rendering and Converting of PDF Documents. Utilities based on 'libpoppler' for extracting text,
+    # fonts, attachments and metadata from a PDF file. Also supports high quality rendering of PDF documents info PNG,
+    # JPEG, TIFF format, or into raw bitmap vectors
     pdftools \
-    # Simplifies the creation of Excel .xlsx files by providing a high level interface to writing, styling and editing worksheets. Through the use of 'Rcpp', read/write times are comparable to the 'xlsx' and 'XLConnect' packages with the added benefit of removing the dependency on Java.
+    # Simplifies the creation of Excel .xlsx files by providing a high level interface to writing, styling and editing
+    # worksheets. Through the use of 'Rcpp', read/write times are comparable to the 'xlsx' and 'XLConnect' packages with
+    # the added benefit of removing the dependency on Java.
     openxlsx \
     && rm -rf /tmp/downloaded_packages/
 
@@ -174,14 +190,15 @@ RUN install2.r --error \
 RUN install2.r --error \ 
     # An interface to the Gmail RESTful API. Allows access to your Gmail messages, threads, drafts and labels.
     gmailr \
-    #Gives the ability to automatically generate and serve an HTTP API from R functions using the annotations in the R documentation around your functions.
+    #Gives the ability to automatically generate and serve an HTTP API from R functions using the annotations in the R
+    #documentation around your functions.
     plumber \
-    # Pure R implementation of the ubiquitous log4j package. It offers hierarchic loggers, multiple handlers per logger, level based filtering, space handling in messages and custom formatting.
+    # Pure R implementation of the ubiquitous log4j package. It offers hierarchic loggers, multiple handlers per logger,
+    # level based filtering, space handling in messages and custom formatting.
     logging \
     && rm -rf /tmp/downloaded_packages/
 
-# create a non-root user named docker, 
-# give them the password "docker" put them in the sudo group
+# create a non-root user named docker, give them the password "docker" put them in the sudo group
 RUN useradd -d /home/docker -m -s /bin/bash docker && echo "docker:docker" | chpasswd && adduser docker sudo
 
 # start working in the "docker" home directory
