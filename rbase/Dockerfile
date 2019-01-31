@@ -35,14 +35,13 @@ RUN apt-get update && apt-get install -y \
 
 RUN install2.r --error \
   sys \
-  askpass \
+  #askpass \
   openssl \
-  curl \
-  httr \
+  Rcpp curl httr xml2 rvest \
   && rm -rf /tmp/downloaded_packages/
 
 RUN install2.r --error \
-  Rcpp xml2 glue stringi stringr selectr magrittr rvest\
+  glue stringi stringr selectr magrittr \
   tidyverse \
   && rm -rf /tmp/downloaded_packages/
 
@@ -148,6 +147,10 @@ RUN install2.r --error \
     lmtest \
     # core survival analysis routines, including definition of Surv objects, Kaplan-Meier and Aalen-Johansen (multi-state) curves, Cox models, and parametric accelerated failure time models.
     survival \
+    # Tools for Descriptive Statistics first descriptive tasks in data analysis,
+    # consisting of calculating descriptive statistics, drawing graphical summaries and reporting the results
+    # %overlaps% determines if two date ranges overlap
+    DescTools \
     && rm -rf /tmp/downloaded_packages/
 
 # connection to other applications: Excel, Acrobat, ...
@@ -158,14 +161,6 @@ RUN install2.r --error \
     openxlsx \
     && rm -rf /tmp/downloaded_packages/
 
-# web scrapping
-RUN install2.r --error \ 
-  # Wrappers around the 'xml2' and 'httr' packages to make it easy to download, then manipulate, HTML and XML.
-  rvest \
-  # An interface to the Gmail RESTful API. Allows access to your Gmail messages, threads, drafts and labels.
-  gmailr \
-  && rm -rf /tmp/downloaded_packages/
-
 RUN install2.r --error \ 
     # easy and simple way to read, write and display bitmap images stored in the JPEG format
     png \
@@ -175,7 +170,10 @@ RUN install2.r --error \
     feedeR \
     && rm -rf /tmp/downloaded_packages/
 
+# RESTful API
 RUN install2.r --error \ 
+    # An interface to the Gmail RESTful API. Allows access to your Gmail messages, threads, drafts and labels.
+    gmailr \
     #Gives the ability to automatically generate and serve an HTTP API from R functions using the annotations in the R documentation around your functions.
     plumber \
     # Pure R implementation of the ubiquitous log4j package. It offers hierarchic loggers, multiple handlers per logger, level based filtering, space handling in messages and custom formatting.
